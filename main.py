@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 import altair as alt
 import matplotlib
+from datetime import datetime
+
 
 from rpy2.robjects import r
 from rpy2.robjects.conversion import localconverter, rpy2py
@@ -416,3 +418,10 @@ df_final = df4[[
 
 # Exibe tabela final
 st.dataframe(df_final, use_container_width=True)
+
+
+# Pega a data atual no formato DD/MM/AAAA
+hoje = datetime.now().strftime("%d/%m/%Y")
+
+# Exibe a mensagem no final da página
+st.warning(f"Última atualização da base realizada em {hoje}.")
