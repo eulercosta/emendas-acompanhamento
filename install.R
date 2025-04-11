@@ -1,1 +1,2 @@
-install.packages("orcamentoBR", repos="https://cloud.r-project.org")
+install.packages("remotes")
+remotes::install_cran("orcamentoBR")
