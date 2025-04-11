@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6c5c5783-2cd5-4357-939f-efe2b49de4d3" name="Changes" comment="Add r-package">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+    <list default="true" id="6c5c5783-2cd5-4357-939f-efe2b49de4d3" name="Changes" comment="Atualiza main.py">
+      <change afterPath="$PROJECT_DIR$/install.R" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages.txt" beforeDir="false" afterPath="$PROJECT_DIR$/apt-packages.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,12 +97,37 @@
       <option name="project" value="LOCAL" />
       <updated>1744395917938</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Atualiza main.py">
+      <option name="closed" value="true" />
+      <created>1744396575375</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1744396575375</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Atualiza main.py">
+      <option name="closed" value="true" />
+      <created>1744396714950</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1744396714950</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Atualiza main.py">
+      <option name="closed" value="true" />
+      <created>1744396740077</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1744396740077</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Add r-package" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add r-package" />
+    <MESSAGE value="Atualiza main.py" />
+    <option name="LAST_COMMIT_MESSAGE" value="Atualiza main.py" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -114,7 +139,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main.py</url>
-          <line>123</line>
+          <line>121</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
