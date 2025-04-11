@@ -80,8 +80,6 @@ with st.spinner("Carregando dados..."):
 df = aplicar_transformacoes(df)
 st.success("Dados carregados com sucesso!")
 
-df
-
 # ---------------------------
 # 1) Evolução ResultadoPrimario_desc × Ano
 # ---------------------------
