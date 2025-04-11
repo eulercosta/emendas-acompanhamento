@@ -1,43 +1,31 @@
 import streamlit as st
 import pandas as pd
+import subprocess
 import altair as alt
 import matplotlib
 from datetime import datetime
-
-
-from rpy2.robjects import r
-from rpy2.robjects.conversion import localconverter, rpy2py
-from rpy2.robjects import default_converter, pandas2ri
-
-pandas2ri.activate()
 
 # ------------------------------
 # Carregar dados do R
 # ------------------------------
 @st.cache_data(show_spinner=True)
 def carregar_dados_emendas():
-    r('library(orcamentoBR)')
-    r('dados_total <- data.frame()')
+    # Executa o script R
+    process = subprocess.Popen(
+        ["Rscript", "extrair_dados_emendas.R"],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True
+    )
+    stdout, stderr = process.communicate()
 
-    for ano in [2022, 2023, 2024, 2025]:
-        r(f'''
-            dados <- despesaDetalhada(
-                exercicio = {ano},
-                detalheMaximo = FALSE,
-                Funcao = TRUE,
-                Acao = TRUE,
-                ModalidadeAplicacao = TRUE,
-                ResultadoPrimario = TRUE,
-                incluiDescricoes = TRUE
-            )
-            dados_emendas <- subset(dados, ResultadoPrimario_cod %in% c("6", "7", "8"))
-            dados_emendas$Ano <- {ano}
-            dados_total <- rbind(dados_total, dados_emendas)
-        ''')
+    if process.returncode != 0:
+        st.error("Erro ao rodar o script em R:")
+        st.code(stderr)
+        return pd.DataFrame()  # Retorna vazio em caso de erro
 
-    with localconverter(default_converter + pandas2ri.converter):
-        df = rpy2py(r['dados_total'])
-
+    # Lê o CSV gerado
+    df = pd.read_csv("dados_emendas.csv", encoding="utf-8")
     return df
 
 # ------------------------------

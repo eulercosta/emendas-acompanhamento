@@ -1,5 +1,4 @@
 streamlit
 pandas
-rpy2==3.5.1
 altair
 matplotlib
