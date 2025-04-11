@@ -10,7 +10,6 @@ from datetime import datetime
 # ------------------------------
 @st.cache_data(show_spinner=True)
 def carregar_dados_emendas():
-    # Executa o script R
     process = subprocess.Popen(
         ["Rscript", "extrair_dados_emendas.R"],
         stdout=subprocess.PIPE,
@@ -22,9 +21,8 @@ def carregar_dados_emendas():
     if process.returncode != 0:
         st.error("Erro ao rodar o script em R:")
         st.code(stderr)
-        return pd.DataFrame()  # Retorna vazio em caso de erro
+        return pd.DataFrame()
 
-    # Lê o CSV gerado
     df = pd.read_csv("dados_emendas.csv", encoding="utf-8")
     return df
 
@@ -35,10 +33,10 @@ def aplicar_transformacoes(df):
     # tipo_emenda
     df["tipo_emenda"] = df.apply(
         lambda row: (
-            "Bancada" if row["ResultadoPrimario_cod"] == "7" else
-            "Comissão" if row["ResultadoPrimario_cod"] == "8" else
-            "Individual - transferência especial (Pix)" if row["ResultadoPrimario_cod"] == "6" and row["Acao_cod"] == "0EC2" else
-            "Individual - finalidade definida" if row["ResultadoPrimario_cod"] == "6" else
+            "Bancada" if row["ResultadoPrimario_cod"] == 7 else
+            "Comissão" if row["ResultadoPrimario_cod"] == 8 else
+            "Individual - transferência especial (Pix)" if row["ResultadoPrimario_cod"] == 6 and row["Acao_cod"] == "0EC2" else
+            "Individual - finalidade definida" if row["ResultadoPrimario_cod"] == 6 else
             None
         ),
         axis=1
@@ -81,6 +79,8 @@ with st.spinner("Carregando dados..."):
 
 df = aplicar_transformacoes(df)
 st.success("Dados carregados com sucesso!")
+
+df
 
 # ---------------------------
 # 1) Evolução ResultadoPrimario_desc × Ano
@@ -412,4 +412,15 @@ st.dataframe(df_final, use_container_width=True)
 hoje = datetime.now().strftime("%d/%m/%Y")
 
 # Exibe a mensagem no final da página
-st.warning(f"Última atualização da base realizada em {hoje}.")
+st.warning(f"Última atualização em {hoje}")
+
+st.markdown("---")
+
+st.markdown(
+    """
+    🔗 Este aplicativo utiliza os dados obtidos via pacote [**orcamentoBR**](https://cran.r-project.org/web/packages/orcamentoBR/index.html), 
+    desenvolvido para facilitar o acesso ao orçamento público brasileiro diretamente a partir da linguagem R.
+
+    🙌 Agradecimentos especiais aos desenvolvedores do pacote.
+    """
+)
