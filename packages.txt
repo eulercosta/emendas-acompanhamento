@@ -1,3 +1,2 @@
-r-base
-r-base-dev
-r-cran-orcamentobr
+install.packages("remotes")
+remotes::install_cran("orcamentoBR")
