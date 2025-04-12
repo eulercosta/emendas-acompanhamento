@@ -1,28 +1,46 @@
 import streamlit as st
 import pandas as pd
-import subprocess
 import altair as alt
 from datetime import datetime
 
-# ------------------------------
-# Carregar dados do R
-# ------------------------------
+# Imports do rpy2
+from rpy2.robjects import r
+from rpy2.robjects.conversion import localconverter, rpy2py
+from rpy2.robjects import default_converter, pandas2ri
+
+pandas2ri.activate()
+
 @st.cache_data(show_spinner=True)
 def carregar_dados_emendas():
-    process = subprocess.Popen(
-        ["Rscript", "extrair_dados_emendas.R"],
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        text=True
-    )
-    stdout, stderr = process.communicate()
+    # Biblioteca do R
+    r('library(orcamentoBR)')
 
-    if process.returncode != 0:
-        st.error("Erro ao rodar o script em R:")
-        st.code(stderr)
-        return pd.DataFrame()
+    # Cria o data.frame inicial
+    r('dados_total <- data.frame()')
 
-    df = pd.read_csv("dados_emendas.csv", encoding="utf-8")
+    anos = [2022, 2023, 2024, 2025]
+    for ano in anos:
+        r(f'''
+            dados <- despesaDetalhada(
+                exercicio = {ano},
+                detalheMaximo = FALSE,
+                Funcao = TRUE,
+                Acao = TRUE,
+                ModalidadeAplicacao = TRUE,
+                ResultadoPrimario = TRUE,
+                incluiDescricoes = TRUE
+            )
+            # Filtra apenas emendas parlamentares
+            dados_emendas <- subset(dados, ResultadoPrimario_cod %in% c("6", "7", "8"))
+            dados_emendas$Ano <- {ano}
+            dados_total <- rbind(dados_total, dados_emendas)
+        ''')
+
+    with localconverter(default_converter + pandas2ri.converter):
+        # Pega o data.frame R
+        r_df = r['dados_total']
+        df = rpy2py(r_df)
+
     return df
 
 # ------------------------------
@@ -32,10 +50,10 @@ def aplicar_transformacoes(df):
     # tipo_emenda
     df["tipo_emenda"] = df.apply(
         lambda row: (
-            "Bancada" if row["ResultadoPrimario_cod"] == 7 else
-            "Comissão" if row["ResultadoPrimario_cod"] == 8 else
-            "Individual - transferência especial (Pix)" if row["ResultadoPrimario_cod"] == 6 and row["Acao_cod"] == "0EC2" else
-            "Individual - finalidade definida" if row["ResultadoPrimario_cod"] == 6 else
+            "Bancada" if row["ResultadoPrimario_cod"] == "7" else
+            "Comissão" if row["ResultadoPrimario_cod"] == "8" else
+            "Individual - transferência especial (Pix)" if row["ResultadoPrimario_cod"] == "6" and row["Acao_cod"] == "0EC2" else
+            "Individual - finalidade definida" if row["ResultadoPrimario_cod"] == "6" else
             None
         ),
         axis=1

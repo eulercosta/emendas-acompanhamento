@@ -5,7 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6c5c5783-2cd5-4357-939f-efe2b49de4d3" name="Changes" comment="Atualiza packages.txt">
-      <change beforePath="$PROJECT_DIR$/install.R" beforeDir="false" afterPath="$PROJECT_DIR$/install.R" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dados_emendas.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/extrair_dados_emendas.R" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/install.R" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages.txt" beforeDir="false" afterPath="$PROJECT_DIR$/packages.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/postinstall" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -168,7 +175,15 @@
       <option name="project" value="LOCAL" />
       <updated>1744403763892</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Atualiza packages.txt">
+      <option name="closed" value="true" />
+      <created>1744425292390</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1744425292390</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -182,12 +197,12 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main.py</url>
-          <line>73</line>
+          <line>91</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main.py</url>
-          <line>120</line>
+          <line>138</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
