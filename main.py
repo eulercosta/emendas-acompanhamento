@@ -12,6 +12,20 @@ from rpy2.robjects import default_converter, pandas2ri
 r('if (!dir.exists(Sys.getenv("R_LIBS_USER"))) { '
   'dir.create(Sys.getenv("R_LIBS_USER"), recursive = TRUE) }')
 
+# Instala o pacote curl, se não estiver instalado
+r('if (!("curl" %in% rownames(installed.packages(lib.loc = Sys.getenv("R_LIBS_USER"))))) { '
+  'install.packages("httr", repos="https://cran.rstudio.com", lib = Sys.getenv("R_LIBS_USER")) }')
+
+# Carrega o pacote curl a partir da biblioteca pessoal
+r('library(curl, lib.loc = Sys.getenv("R_LIBS_USER"))')
+
+# Instala o pacote jsonlite, se não estiver instalado
+r('if (!("jsonlite" %in% rownames(installed.packages(lib.loc = Sys.getenv("R_LIBS_USER"))))) { '
+  'install.packages("jsonlite", repos="https://cran.rstudio.com", lib = Sys.getenv("R_LIBS_USER")) }')
+
+# Carrega o pacote jsonlite a partir da biblioteca pessoal
+r('library(jsonlite, lib.loc = Sys.getenv("R_LIBS_USER"))')
+
 # Instala o pacote httr, se não estiver instalado
 r('if (!("httr" %in% rownames(installed.packages(lib.loc = Sys.getenv("R_LIBS_USER"))))) { '
   'install.packages("httr", repos="https://cran.rstudio.com", lib = Sys.getenv("R_LIBS_USER")) }')
