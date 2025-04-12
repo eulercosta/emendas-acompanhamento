@@ -8,11 +8,29 @@ from rpy2.robjects import r
 from rpy2.robjects.conversion import localconverter, rpy2py
 from rpy2.robjects import default_converter, pandas2ri
 
+# Cria o diretório da biblioteca pessoal, se necessário
+r('if (!dir.exists(Sys.getenv("R_LIBS_USER"))) { '
+  'dir.create(Sys.getenv("R_LIBS_USER"), recursive = TRUE) }')
+
+# Instala o pacote httr, se não estiver instalado
+r('if (!("httr" %in% rownames(installed.packages(lib.loc = Sys.getenv("R_LIBS_USER"))))) { '
+  'install.packages("httr", repos="https://cran.rstudio.com", lib = Sys.getenv("R_LIBS_USER")) }')
+
+# Carrega o pacote httr a partir da biblioteca pessoal
+r('library(httr, lib.loc = Sys.getenv("R_LIBS_USER"))')
+
+# Instala o pacote orcamentoBR, se não estiver instalado
+r('if (!("orcamentoBR" %in% rownames(installed.packages(lib.loc = Sys.getenv("R_LIBS_USER"))))) { '
+  'install.packages("orcamentoBR", repos="https://cran.rstudio.com", lib = Sys.getenv("R_LIBS_USER")) }')
+
+# Carrega o pacote orcamentoBR a partir da biblioteca pessoal
+r('library(orcamentoBR, lib.loc = Sys.getenv("R_LIBS_USER"))')
+
 # Biblioteca do R
 #pandas2ri.activate()
 r('library(orcamentoBR)')
 
-#@st.cache_data(show_spinner=True)
+@st.cache_data(show_spinner=True)
 def carregar_dados_emendas():
     # Cria o data.frame inicial
     r('dados_total <- data.frame()')
