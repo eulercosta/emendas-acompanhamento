@@ -1,4 +1,5 @@
 # extrair_dados_emendas.R
+.libPaths("/tmp/Rpackages")
 library(orcamentoBR)
 
 dados_total <- data.frame()
