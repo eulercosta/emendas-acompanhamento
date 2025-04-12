@@ -1,9 +1,12 @@
-# Cria a pasta de bibliotecas se não existir
-dir.create(Sys.getenv("R_LIBS_USER"), showWarnings = FALSE, recursive = TRUE)
+# Define o diretório gravável de pacotes (usado em deploy)
+custom_lib <- "/tmp/Rpackages"
+Sys.setenv(R_LIBS_USER = custom_lib)
+
+# Cria a pasta se ela não existir
+dir.create(custom_lib, showWarnings = FALSE, recursive = TRUE)
 
 # Instala o pacote 'remotes' (se necessário)
 install.packages("remotes")
 
-# Instala 'orcamentoBR' no diretório que definimos em R_LIBS_USER
-remotes::install_cran("orcamentoBR",
-                        lib = Sys.getenv("R_LIBS_USER"))
+# Instala orcamentoBR na pasta customizada
+remotes::install_cran("orcamentoBR", lib = custom_lib)

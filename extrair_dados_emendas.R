@@ -1,5 +1,9 @@
-# extrair_dados_emendas.R
-.libPaths("/tmp/Rpackages")
+# Define a mesma pasta customizada para pacotes
+custom_lib <- "/tmp/Rpackages"
+Sys.setenv(R_LIBS_USER = custom_lib)
+.libPaths(custom_lib)
+
+# Agora tenta carregar o pacote orcamentoBR
 library(orcamentoBR)
 
 dados_total <- data.frame()

@@ -1,8 +1,2 @@
 #!/bin/bash
-# Script que será rodado automaticamente no final da instalação
-
-# Definimos uma variável de ambiente para o diretório de bibliotecas R
-export R_LIBS_USER="/tmp/Rpackages"
-
-# Rodamos o script install.R, que faz a instalação do orcamentoBR nesse diretório
 Rscript install.R
