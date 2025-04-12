@@ -27,7 +27,7 @@ r('if (!("orcamentoBR" %in% rownames(installed.packages(lib.loc = Sys.getenv("R_
 r('library(orcamentoBR, lib.loc = Sys.getenv("R_LIBS_USER"))')
 
 # Biblioteca do R
-#pandas2ri.activate()
+pandas2ri.activate()
 r('library(orcamentoBR)')
 
 @st.cache_data(show_spinner=True)
