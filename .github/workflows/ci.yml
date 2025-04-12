@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v2
+
+      # Configurar o ambiente R
+      - name: Configurar R
+        uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: '4.1.0'
+
+      - name: Instalar pacote orcamentoBR
+        run: |
+          # Caso o pacote esteja no CRAN:
+          R -e "install.packages('orcamentoBR', repos='https://cran.rstudio.com')"
+          # Se ele estiver no GitHub, use:
+          # R -e "install.packages('remotes'); remotes::install_github('usuario/orcamentoBR')"
+
+      # Configurar o ambiente Python
+      - name: Configurar Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+
+      - name: Instalar dependências Python
+        run: pip install -r requirements.txt
+
+      - name: Executar testes/Aplicação Streamlit
+        run: |
+          # Se for executar testes:
+          #pytest
+          # Ou para rodar o aplicativo Streamlit:
+          streamlit run app.py --server.headless true
