@@ -8,13 +8,12 @@ from rpy2.robjects import r
 from rpy2.robjects.conversion import localconverter, rpy2py
 from rpy2.robjects import default_converter, pandas2ri
 
-pandas2ri.activate()
+# Biblioteca do R
+#pandas2ri.activate()
 r('library(orcamentoBR)')
 
-@st.cache_data(show_spinner=True)
+#@st.cache_data(show_spinner=True)
 def carregar_dados_emendas():
-    # Biblioteca do R
-
     # Cria o data.frame inicial
     r('dados_total <- data.frame()')
 
