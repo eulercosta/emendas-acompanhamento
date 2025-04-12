@@ -37,8 +37,5 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Executar testes/Aplicação Streamlit
-        run: |
-          # Se for executar testes:
-          #pytest
-          # Ou para rodar o aplicativo Streamlit:
+        run:
           streamlit run app.py --server.headless true
